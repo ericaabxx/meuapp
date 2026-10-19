@@ -1,12 +1,37 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet  } from 'react-native';
+import { View, Text, StyleSheet, TextInput  } from 'react-native';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: ''
+    };
+
+    this.pegaNome = this.pegaNome.bind(this);
+  }
+
+  pegaNome(texto){
+
+    if(texto.length > 0){
+      this.setState({nome: 'Bem vindo, ' + texto});
+    } else {
+      this.setState({nome: ''})
+    }
+    
+    
+  }
+
   render() {
     return(
-      <View style={{backgroundColor: "#ddd", flex: 1}} >
-        <View style={styles.container}>
-        </View>
+      <View style={styles.container} >
+        <TextInput 
+        style={styles.input}
+        placeholder='Digite seu nome'
+        onChangeText={this.pegaNome}
+        underlineColorAndroid={'transparent'}
+        />
+        <Text style={styles.texto}>{this.state.nome}</Text>
       </View>
   );
   }
@@ -15,9 +40,23 @@ class App extends Component {
 const styles = StyleSheet.create({
 
   container: { 
-  width: 50,
-  height: 50,
-  backgroundColor: 'red',
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#fff',
+  },
+  texto: {
+    fontSize: 25,
+    color: '#000',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  input: {
+    height: 45, 
+    borderWidth: 1,
+    borderColor: '#222',
+    margin: 10,
+    fontSize: 20
   }
 
 });
